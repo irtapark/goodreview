@@ -42,7 +42,7 @@ export default function Navbar() {
                   <span className="sm:hidden">Panel</span>
                 </Link>
               ) : (
-                <Link to="/" className="btn btn-outline flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
+                <Link to="/guest" className="btn btn-outline flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
                   <UserCircle size={18} />
                   <span className="hidden sm:inline">Mis Reclamos</span>
                   <span className="sm:hidden">Reclamos</span>

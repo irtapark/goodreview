@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import PropertyDetails from './pages/PropertyDetails';
 import ClaimCashback from './pages/ClaimCashback';
 import HostDashboard from './pages/HostDashboard';
+import GuestDashboard from './pages/GuestDashboard';
 import Auth from './pages/Auth';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
               <Route path="/property/:id" element={<PropertyDetails />} />
               <Route path="/claim/:id" element={<ClaimCashback />} />
               <Route path="/host" element={<HostDashboard />} />
+              <Route path="/guest" element={<GuestDashboard />} />
               <Route path="/login" element={<Auth />} />
             </Routes>
           </main>

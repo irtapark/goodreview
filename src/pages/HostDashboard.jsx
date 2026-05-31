@@ -18,6 +18,10 @@ export default function HostDashboard() {
     title: '', location: '', description: '', image: '', regularPrice: '', basePercent: '', extraPercent: '', airbnbUrl: '', bookingUrl: ''
   });
 
+  // Review Verification Modal State
+  const [selectedClaimForReview, setSelectedClaimForReview] = useState(null);
+  const [showReviewModal, setShowReviewModal] = useState(false);
+
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -239,25 +243,37 @@ export default function HostDashboard() {
                             <td className="p-4 text-sm">{claim.platform}</td>
                             <td className="p-4 font-bold text-green">€{claim.cashback_amount} <span className="text-xs text-secondary font-normal">(Fijo)</span></td>
                             <td className="p-4">
-                              {claim.status === 'paid' ? (
-                                <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-100 px-2 py-1 rounded" style={{ backgroundColor: '#d1fae5', color: '#065f46' }}>
+                              {claim.status === 'paid' && (
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#d1fae5', color: '#065f46' }}>
                                   <ShieldCheck size={14} /> Pagado
                                 </span>
-                              ) : (
-                                <span className="inline-flex items-center gap-1 text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-1 rounded" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>
-                                  Esperando Reseña
+                              )}
+                              {claim.status === 'pending_review' && (
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 bg-blue-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#e0f2fe', color: '#0369a1' }}>
+                                  Reseña Recibida
+                                </span>
+                              )}
+                              {claim.status === 'pending_stay' && (
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>
+                                  Check-out Pendiente
                                 </span>
                               )}
                             </td>
                             <td className="p-4">
-                              {claim.status !== 'paid' && (
+                              {claim.status === 'paid' && (
+                                <span className="text-xs text-secondary font-semibold">Completado</span>
+                              )}
+                              {claim.status === 'pending_review' && (
                                 <button 
-                                  onClick={() => handleVerifyReview(claim.id, claim.cashback_amount)}
+                                  onClick={() => { setSelectedClaimForReview(claim); setShowReviewModal(true); }}
                                   className="btn btn-primary text-xs py-2 px-3 animate-pulse-glow"
                                   style={{ padding: '0.5rem 0.75rem' }}
                                 >
-                                  Simular: Reseña 5★ Verificada
+                                  Verificar Reseña
                                 </button>
+                              )}
+                              {claim.status === 'pending_stay' && (
+                                <span className="text-xs text-secondary italic">Huésped en alojamiento</span>
                               )}
                             </td>
                           </tr>
@@ -337,6 +353,61 @@ export default function HostDashboard() {
                 <button type="submit" className="btn btn-primary">Publicar Propiedad</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+      {/* Review Verification Modal */}
+      {showReviewModal && selectedClaimForReview && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="flex justify-between items-center p-6 border-b border-gray-200">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <ShieldCheck size={22} color="var(--secondary-color)" /> Verificar Reseña de Huésped
+              </h2>
+              <button onClick={() => setShowReviewModal(false)} className="text-secondary hover:text-primary">
+                ✕
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs sm:text-sm space-y-2 text-secondary">
+                <div><strong>ID de Reserva:</strong> <span className="font-mono">{selectedClaimForReview.external_booking_id}</span></div>
+                <div><strong>Plataforma:</strong> {selectedClaimForReview.platform}</div>
+                <div><strong>Cashback a liberar:</strong> <span className="text-green font-bold">€{selectedClaimForReview.cashback_amount}</span></div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-xs sm:text-sm mb-2 text-secondary">Comentario de Reseña Pública (Copiado por el Huésped):</h4>
+                <div className="p-4 rounded-lg bg-yellow-50 border border-yellow-100 italic text-xs sm:text-sm text-secondary">
+                  "{selectedClaimForReview.review_text}"
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-xs sm:text-sm mb-2 text-secondary">Captura de Pantalla Enviada:</h4>
+                <div className="border border-gray-200 rounded-lg overflow-hidden max-h-60 bg-gray-100 flex items-center justify-center">
+                  <img 
+                    src={selectedClaimForReview.review_screenshot} 
+                    alt="Review Screenshot" 
+                    className="max-w-full max-h-full object-contain" 
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-4 justify-end border-t border-gray-200 pt-6">
+                <button type="button" onClick={() => setShowReviewModal(false)} className="btn btn-secondary text-xs">Cerrar</button>
+                <button 
+                  type="button" 
+                  onClick={() => {
+                    handleVerifyReview(selectedClaimForReview.id, selectedClaimForReview.cashback_amount);
+                    setShowReviewModal(false);
+                  }}
+                  className="btn btn-primary text-xs flex items-center gap-1"
+                >
+                  <ShieldCheck size={14} /> Aprobar y Liberar Reembolso
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

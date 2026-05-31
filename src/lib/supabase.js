@@ -101,6 +101,12 @@ export const supabase = {
         const records = (db[tableName] || []).filter(item => item.host_id == hostId);
         return { data: records, error: null };
       },
+      selectByGuestId: async (guestId) => {
+        await new Promise(resolve => setTimeout(resolve, 300));
+        const db = JSON.parse(localStorage.getItem('goodreview_db_v5'));
+        const records = (db[tableName] || []).filter(item => item.guest_id == guestId);
+        return { data: records, error: null };
+      },
       insert: async (newRecord) => {
         await new Promise(resolve => setTimeout(resolve, 500));
         const db = JSON.parse(localStorage.getItem('goodreview_db_v5'));
