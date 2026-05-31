@@ -18,8 +18,8 @@ export default function Navbar() {
     <nav style={{ backgroundColor: 'var(--surface-color)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 50 }}>
       <div className="container flex items-center justify-between py-3 md:py-4">
         <Link to="/" className="flex items-center gap-2">
-          <ShieldCheck size={28} color="var(--secondary-color)" />
-          <span className="text-xl md:text-2xl font-bold text-brand hidden sm:inline">GoodReview</span>
+          <ShieldCheck size={26} color="var(--secondary-color)" />
+          <span className="text-xl md:text-2xl font-bold text-brand">GoodReview</span>
         </Link>
         
         <div className="flex items-center gap-2 sm:gap-4">
