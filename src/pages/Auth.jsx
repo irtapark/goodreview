@@ -27,7 +27,7 @@ export default function Auth() {
         setError(error.message);
       } else {
         setUser(data.user);
-        navigate(data.user.role === 'host' ? '/host' : '/');
+        navigate(data.user.role === 'host' ? '/host' : '/guest');
       }
     } else {
       const { data, error } = await supabase.auth.signUp({
@@ -44,7 +44,7 @@ export default function Auth() {
         setError(error.message);
       } else {
         setUser(data.user);
-        navigate(isHost ? '/host' : '/');
+        navigate(isHost ? '/host' : '/guest');
       }
     }
     setLoading(false);
