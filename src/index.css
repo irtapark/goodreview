@@ -123,6 +123,14 @@ img {
 
 /* Ocultar/Mostrar Responsivo */
 .hidden { display: none; }
+
+@media (min-width: 640px) {
+  .sm-block { display: block; }
+  .sm-inline { display: inline; }
+  .sm-flex { display: flex; }
+  .sm-hidden { display: none !important; }
+}
+
 @media (min-width: 768px) {
   .md-block { display: block; }
   .md-inline { display: inline; }
