@@ -79,7 +79,13 @@ img {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem; /* Más compacto en móvil */
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
 }
 
 .flex { display: flex; }
@@ -88,14 +94,40 @@ img {
 .justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
 .gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
 .gap-4 { gap: 1rem; }
 .gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
 
 .grid { display: grid; }
+.grid-cols-1 { grid-template-columns: 1fr; }
 .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Clases de Grilla y Columnas Responsivas */
+@media (min-width: 640px) {
+  .sm-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+  .md-grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .md-grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .md-grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+  
+  .md-col-span-2 { grid-column: span 2 / span 2; }
+  .md-col-span-3 { grid-column: span 3 / span 3; }
+  
+  .md-flex-row { flex-direction: row; }
+}
+
+/* Ocultar/Mostrar Responsivo */
+.hidden { display: none; }
+@media (min-width: 768px) {
+  .md-block { display: block; }
+  .md-inline { display: inline; }
+  .md-flex { display: flex; }
+}
 
 /* --- Components --- */
 
@@ -110,6 +142,14 @@ img {
   font-weight: 500;
   font-size: 1rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap; /* Evita que el texto del botón se rompa */
+}
+
+@media (max-width: 640px) {
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.938rem;
+  }
 }
 
 .btn-primary {
@@ -166,11 +206,23 @@ img {
 .text-brand { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .text-secondary { color: var(--text-secondary); }
 .text-green { color: var(--secondary-color); }
+
+/* Tipografía Líquida Responsiva (Premium) */
 .text-sm { font-size: 0.875rem; }
 .text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-.text-2xl { font-size: 1.5rem; }
-.text-4xl { font-size: 2.25rem; }
+.text-xl { font-size: clamp(1.1rem, 2.5vw, 1.25rem); }
+.text-2xl { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+.text-3xl { font-size: clamp(1.5rem, 3.5vw, 1.875rem); }
+.text-4xl { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+
+/* Título de Hero Responsivo */
+.hero-title {
+  font-size: clamp(2.25rem, 7vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+}
+
 .font-bold { font-weight: 700; }
 .font-medium { font-weight: 500; }
 
@@ -179,6 +231,7 @@ img {
 .mt-8 { margin-top: 2rem; }
 .mt-12 { margin-top: 3rem; }
 .mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
 .mb-8 { margin-bottom: 2rem; }
 
 .py-4 { padding-top: 1rem; padding-bottom: 1rem; }

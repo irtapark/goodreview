@@ -90,18 +90,18 @@ export default function ClaimCashback() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <div className="bg-gray-50 min-h-screen py-8 md:py-12">
       <div className="container max-w-4xl">
-        <Link to={`/property/${id}`} className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-8 font-medium">
+        <Link to={`/property/${id}`} className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-6 md:mb-8 font-medium">
           <ArrowLeft size={20} /> Volver a Propiedad
         </Link>
         
-        <h1 className="text-3xl font-bold mb-8">Reclamar Cashback de GoodReview</h1>
+        <h1 className="text-3xl font-bold mb-6 md:mb-8">Reclamar Cashback de GoodReview</h1>
 
-        <div className="grid grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md-grid-cols-2 gap-8 md:gap-12">
           {/* Form */}
           <div>
-            <form onSubmit={handleSubmit} className="card p-6 bg-white mb-8">
+            <form onSubmit={handleSubmit} className="card p-6 bg-white mb-6 md:mb-8">
               <h2 className="text-xl font-bold mb-6">Detalles de tu Reserva</h2>
               
               <div className="mb-4">

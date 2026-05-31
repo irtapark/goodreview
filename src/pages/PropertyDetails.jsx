@@ -42,12 +42,12 @@ export default function PropertyDetails() {
           </div>
         </div>
 
-        <div style={{ height: '500px', borderRadius: 'var(--radius-xl)', overflow: 'hidden', marginBottom: '2rem' }}>
+        <div style={{ height: 'clamp(240px, 40vh, 500px)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', marginBottom: '2rem' }}>
           <img src={property.image} alt={property.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
 
-        <div className="grid grid-cols-3 gap-12">
-          <div className="col-span-2">
+        <div className="grid grid-cols-1 md-grid-cols-3 gap-8 md:gap-12">
+          <div className="md-col-span-2">
             <h2 className="text-2xl font-bold mb-4">Sobre este espacio</h2>
             <p className="text-secondary leading-relaxed mb-8">{property.description}</p>
             
@@ -60,7 +60,7 @@ export default function PropertyDetails() {
             <hr className="mb-8" style={{ borderColor: 'var(--border-color)' }} />
             
             <h3 className="text-xl font-bold mb-4">Servicios principales</h3>
-            <ul className="grid grid-cols-2 gap-4 text-secondary mb-8">
+            <ul className="grid grid-cols-1 sm-grid-cols-2 gap-3 sm:gap-4 text-secondary mb-8">
               <li className="flex items-center gap-2"><CheckCircle2 size={18} color="var(--secondary-color)"/> Piscina Privada</li>
               <li className="flex items-center gap-2"><CheckCircle2 size={18} color="var(--secondary-color)"/> Wi-Fi de alta velocidad</li>
               <li className="flex items-center gap-2"><CheckCircle2 size={18} color="var(--secondary-color)"/> Cocina completa</li>
@@ -69,7 +69,7 @@ export default function PropertyDetails() {
           </div>
 
           <div>
-            <div className="card p-6" style={{ position: 'sticky', top: '100px' }}>
+            <div className="card p-6" style={{ position: 'sticky', top: '100px', marginBottom: '2rem' }}>
               <h3 className="text-xl font-bold mb-4">Reservar Propiedad</h3>
               
               <div className="flex items-center gap-2 mb-4">

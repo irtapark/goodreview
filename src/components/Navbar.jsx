@@ -16,37 +16,46 @@ export default function Navbar() {
 
   return (
     <nav style={{ backgroundColor: 'var(--surface-color)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 50 }}>
-      <div className="container flex items-center justify-between py-4">
+      <div className="container flex items-center justify-between py-3 md:py-4">
         <Link to="/" className="flex items-center gap-2">
-          <ShieldCheck size={32} color="var(--secondary-color)" />
-          <span className="text-2xl font-bold text-brand">GoodReview</span>
+          <ShieldCheck size={28} color="var(--secondary-color)" />
+          <span className="text-xl md:text-2xl font-bold text-brand hidden sm:inline">GoodReview</span>
         </Link>
         
-        <div className="flex items-center gap-4">
-          <Link to="/" className="btn btn-secondary flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Link to="/" className="btn btn-secondary flex items-center gap-2" style={{ padding: '0.625rem' }}>
             <Search size={18} />
-            <span>Explorar Destinos</span>
+            <span className="hidden sm:inline">Explorar Destinos</span>
           </Link>
           
           {!user ? (
-            <Link to="/login" className="btn btn-outline flex items-center gap-2">
-              <UserCircle size={18} /> Iniciar Sesión
+            <Link to="/login" className="btn btn-outline flex items-center gap-2" style={{ padding: '0.625rem' }}>
+              <UserCircle size={18} />
+              <span className="hidden sm:inline">Iniciar Sesión</span>
             </Link>
           ) : (
             <>
               {user.role === 'host' ? (
-                <Link to="/host" className="btn btn-outline text-brand border-brand">Panel de Anfitrión</Link>
+                <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
+                  <UserCircle size={18} />
+                  <span className="hidden sm:inline">Panel de Anfitrión</span>
+                  <span className="sm:hidden">Panel</span>
+                </Link>
               ) : (
-                <Link to="/" className="btn btn-outline">Mis Reclamos</Link>
+                <Link to="/" className="btn btn-outline flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
+                  <UserCircle size={18} />
+                  <span className="hidden sm:inline">Mis Reclamos</span>
+                  <span className="sm:hidden">Reclamos</span>
+                </Link>
               )}
               
-              <div className="flex items-center gap-3 border-l border-gray-200 pl-4 ml-2">
+              <div className="flex items-center gap-2 sm:gap-3 border-l border-gray-200 pl-2 sm:pl-4 ml-1 sm:ml-2">
                 <div className="text-right hidden md:block">
                   <div className="text-sm font-bold">{user.full_name}</div>
                   <div className="text-xs text-secondary capitalize">{user.role}</div>
                 </div>
                 <button onClick={handleLogout} className="text-secondary hover:text-red-500 transition-colors p-2" title="Cerrar Sesión">
-                  <LogOut size={20} />
+                  <LogOut size={18} />
                 </button>
               </div>
             </>
