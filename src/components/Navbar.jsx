@@ -22,30 +22,28 @@ export default function Navbar() {
           <span className="text-xl md:text-2xl font-bold text-brand">GoodReview</span>
         </Link>
         
-        <div className="flex items-center gap-2 sm:gap-4">
-          <Link to="/" className="btn btn-secondary flex items-center gap-2" style={{ padding: '0.625rem' }}>
+        <div className="flex items-center gap-3 sm:gap-4">
+          <Link to="/" className="btn btn-secondary flex items-center gap-2">
             <Search size={18} />
-            <span className="hidden sm:inline">Explorar Destinos</span>
+            <span>Explorar Destinos</span>
           </Link>
           
           {!user ? (
-            <Link to="/login" className="btn btn-outline flex items-center gap-2" style={{ padding: '0.625rem' }}>
+            <Link to="/login" className="btn btn-outline flex items-center gap-2">
               <UserCircle size={18} />
-              <span className="hidden sm:inline">Iniciar Sesión</span>
+              <span>Iniciar Sesión</span>
             </Link>
           ) : (
             <>
               {user.role === 'host' ? (
-                <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
+                <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center gap-2">
                   <UserCircle size={18} />
-                  <span className="hidden sm:inline">Panel de Anfitrión</span>
-                  <span className="sm:hidden">Panel</span>
+                  <span>Panel de Anfitrión</span>
                 </Link>
               ) : (
-                <Link to="/guest" className="btn btn-outline flex items-center gap-1" style={{ padding: '0.625rem 1rem' }}>
+                <Link to="/guest" className="btn btn-outline flex items-center gap-2">
                   <UserCircle size={18} />
-                  <span className="hidden sm:inline">Mis Reclamos</span>
-                  <span className="sm:hidden">Reclamos</span>
+                  <span>Mis Reclamos</span>
                 </Link>
               )}
               
