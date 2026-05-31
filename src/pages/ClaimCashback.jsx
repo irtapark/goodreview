@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ShieldCheck, ArrowLeft, Banknote, Star, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../context/AuthContext';
 
 export default function ClaimCashback() {
   const { id } = useParams();
+  const { user } = useAuth();
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
@@ -39,7 +41,7 @@ export default function ClaimCashback() {
     
     const newClaim = {
       property_id: property.id,
-      guest_id: 999, // Usuario simulado
+      guest_id: user ? user.id : 999, // Usa el ID del usuario logueado o 999
       host_id: property.host_id,
       external_booking_id: bookingId,
       platform: selectedPlatform,
