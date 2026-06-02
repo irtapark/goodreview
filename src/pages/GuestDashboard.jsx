@@ -103,7 +103,7 @@ export default function GuestDashboard() {
                 <Clock color="#d97706" size={20} />
                 <div className="text-left">
                   <div className="text-xs text-secondary font-bold">PENDIENTE</div>
-                  <div className="text-xl font-bold text-yellow-700" style={{ color: '#d97706' }}>€{totalPending.toFixed(2)}</div>
+                  <div className="text-xl font-bold dashboard-pending-amount">€{totalPending.toFixed(2)}</div>
                 </div>
               </div>
             </div>
@@ -139,17 +139,17 @@ export default function GuestDashboard() {
                           </div>
                           <div>
                             {claim.status === 'paid' && (
-                              <span className="badge badge-green flex items-center gap-1" style={{ fontSize: '0.75rem' }}>
+                              <span className="badge badge-green flex items-center gap-1 dashboard-badge-sm">
                                 <ShieldCheck size={14} /> Pagado
                               </span>
                             )}
                             {claim.status === 'pending_review' && (
-                              <span className="badge badge-blue flex items-center gap-1" style={{ fontSize: '0.75rem' }}>
+                              <span className="badge badge-blue flex items-center gap-1 dashboard-badge-sm">
                                 <Clock size={14} /> Esperando Verificación
                               </span>
                             )}
                             {claim.status === 'pending_stay' && (
-                              <span className="badge flex items-center gap-1" style={{ fontSize: '0.75rem', backgroundColor: '#fef3c7', color: '#b45309' }}>
+                              <span className="badge flex items-center gap-1 dashboard-badge-sm dashboard-badge-yellow">
                                 <Clock size={14} /> Durante Estancia / En Proceso
                               </span>
                             )}
@@ -179,8 +179,7 @@ export default function GuestDashboard() {
                           {claim.status === 'pending_stay' && (
                             <button 
                               onClick={() => handleOpenUpload(claim)}
-                              className="btn btn-primary flex items-center gap-2 text-xs py-2.5"
-                              style={{ padding: '0.625rem 1.25rem' }}
+                              className="btn btn-primary flex items-center gap-2 text-xs py-2.5 btn-padding-lg"
                             >
                               <Upload size={14} /> Subir Evidencia de Reseña
                             </button>

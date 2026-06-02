@@ -128,25 +128,22 @@ export default function HostDashboard() {
         <div className="grid grid-cols-1 md-grid-cols-4 gap-6 md:gap-8">
           {/* Sidebar */}
           <div className="col-span-1">
-            <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <nav className="flex flex-row md:flex-col gap-2 overflow-x-auto pb-2 md:pb-0 host-tabs-container">
               <button 
                 onClick={() => setActiveTab('overview')}
-                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors ${activeTab === 'overview' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
-                style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors host-tab-item ${activeTab === 'overview' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
               >
                 <Wallet size={18} /> Billetera y Resumen
               </button>
               <button 
                 onClick={() => setActiveTab('properties')}
-                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors ${activeTab === 'properties' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
-                style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors host-tab-item ${activeTab === 'properties' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
               >
                 <HomeIcon size={18} /> Mis Propiedades ({properties.length})
               </button>
               <button 
                 onClick={() => setActiveTab('claims')}
-                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors ${activeTab === 'claims' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
-                style={{ whiteSpace: 'nowrap', flexShrink: 0 }}
+                className={`flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg font-medium transition-colors host-tab-item ${activeTab === 'claims' ? 'bg-primary text-white' : 'hover:bg-gray-200 bg-white border border-gray-200'}`}
               >
                 <CheckSquare size={18} /> Reseñas Pendientes ({claims.filter(c => c.status !== 'paid').length})
               </button>
@@ -159,7 +156,7 @@ export default function HostDashboard() {
             {/* OVERVIEW TAB */}
             {activeTab === 'overview' && (
               <div className="space-y-6">
-                <div className="card p-6 md:p-8 bg-white border-2" style={{ borderColor: 'var(--border-color)' }}>
+                <div className="card p-6 md:p-8 bg-white border-2 host-property-card">
                   <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
                     <div>
                       <h2 className="text-xl md:text-2xl font-bold mb-2">Billetera Virtual (Prepago)</h2>
@@ -190,7 +187,7 @@ export default function HostDashboard() {
               <div className="space-y-6">
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-xl md:text-2xl font-bold">Mis Propiedades</h2>
-                  <button onClick={() => setShowAddModal(true)} className="btn btn-primary flex items-center gap-2" style={{ padding: '0.625rem 1.25rem' }}><Plus size={18} /> Añadir Propiedad</button>
+                  <button onClick={() => setShowAddModal(true)} className="btn btn-primary flex items-center gap-2 btn-padding-lg"><Plus size={18} /> Añadir Propiedad</button>
                 </div>
                 
                 {properties.map(prop => (
@@ -200,7 +197,7 @@ export default function HostDashboard() {
                       <h3 className="text-lg sm:text-xl font-bold mb-1">{prop.title}</h3>
                       <p className="text-xs sm:text-sm text-secondary mb-3">{prop.location}</p>
                       <div className="flex items-center gap-4 mb-4">
-                        <span className="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1" style={{ backgroundColor: '#d1fae5', color: '#065f46' }}>
+                        <span className="bg-green-100 text-green-800 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 host-badge-green">
                           Fórmula: {prop.basePercent}% (1ª noche) + {prop.extraPercent}% (adicionales)
                         </span>
                       </div>
@@ -226,7 +223,7 @@ export default function HostDashboard() {
                   <div className="p-8 text-center text-secondary bg-white rounded-xl border border-gray-200">No hay reclamos registrados.</div>
                 ) : (
                   <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white w-full">
-                    <table className="w-full text-left" style={{ minWidth: '640px' }}>
+                    <table className="w-full text-left host-table">
                       <thead className="bg-gray-50 border-b border-gray-200">
                         <tr>
                           <th className="p-4 text-xs font-bold text-secondary uppercase">ID Reserva</th>
@@ -244,17 +241,17 @@ export default function HostDashboard() {
                             <td className="p-4 font-bold text-green">€{claim.cashback_amount} <span className="text-xs text-secondary font-normal">(Fijo)</span></td>
                             <td className="p-4">
                               {claim.status === 'paid' && (
-                                <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#d1fae5', color: '#065f46' }}>
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-100 px-2 py-1.5 rounded host-badge-green">
                                   <ShieldCheck size={14} /> Pagado
                                 </span>
                               )}
                               {claim.status === 'pending_review' && (
-                                <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 bg-blue-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#e0f2fe', color: '#0369a1' }}>
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-blue-700 bg-blue-100 px-2 py-1.5 rounded host-badge-blue">
                                   Reseña Recibida
                                 </span>
                               )}
                               {claim.status === 'pending_stay' && (
-                                <span className="inline-flex items-center gap-1 text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-1.5 rounded" style={{ backgroundColor: '#fef3c7', color: '#92400e' }}>
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-1.5 rounded host-badge-yellow">
                                   Check-out Pendiente
                                 </span>
                               )}
@@ -266,8 +263,7 @@ export default function HostDashboard() {
                               {claim.status === 'pending_review' && (
                                 <button 
                                   onClick={() => { setSelectedClaimForReview(claim); setShowReviewModal(true); }}
-                                  className="btn btn-primary text-xs py-2 px-3 animate-pulse-glow"
-                                  style={{ padding: '0.5rem 0.75rem' }}
+                                  className="btn btn-primary text-xs py-2 px-3 animate-pulse-glow btn-padding-sm"
                                 >
                                   Verificar Reseña
                                 </button>

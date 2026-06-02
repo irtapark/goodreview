@@ -18,7 +18,7 @@ export default function Navbar() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <nav style={{ backgroundColor: 'var(--surface-color)', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, zIndex: 50 }}>
+    <nav className="nav-bar-sticky">
       <div className="container flex items-center justify-between py-3 md:py-4">
         <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
           <ShieldCheck size={26} color="var(--secondary-color)" />
@@ -39,7 +39,12 @@ export default function Navbar() {
             </Link>
           ) : (
             <>
-              {user.role === 'host' ? (
+              {user.role === 'admin' ? (
+                <Link to="/admin" className="btn btn-outline text-blue-600 border-blue-600 flex items-center gap-2">
+                  <ShieldCheck size={18} />
+                  <span>Panel de Control</span>
+                </Link>
+              ) : user.role === 'host' ? (
                 <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center gap-2">
                   <UserCircle size={18} />
                   <span>Panel de Anfitrión</span>
@@ -51,14 +56,29 @@ export default function Navbar() {
                 </Link>
               )}
               
-              <div className="flex items-center gap-3 border-l border-gray-200 pl-4 ml-2">
-                <div className="text-right">
+              <div className="flex items-center gap-3 border-l border-gray-200 pl-4 ml-2 relative group cursor-pointer">
+                <div className="text-right hidden md:block">
                   <div className="text-sm font-bold">{user.full_name}</div>
                   <div className="text-xs text-secondary capitalize">{user.role}</div>
                 </div>
-                <button onClick={handleLogout} className="text-secondary hover:text-red-500 transition-colors p-2" title="Cerrar Sesión">
-                  <LogOut size={18} />
-                </button>
+                {user.avatar_url ? (
+                  <img src={user.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-primary" />
+                ) : (
+                  <UserCircle size={36} className="text-gray-400" />
+                )}
+                
+                {/* Dropdown Desktop */}
+                <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                  <div className="flex flex-col py-2">
+                    <Link to="/profile" className="px-4 py-2 hover:bg-gray-100 text-sm font-medium flex items-center gap-2">
+                      <UserCircle size={16} /> Mi Perfil
+                    </Link>
+                    <hr className="my-1 border-gray-100" />
+                    <button onClick={handleLogout} className="px-4 py-2 hover:bg-gray-100 text-sm font-medium text-red-500 flex items-center gap-2 text-left">
+                      <LogOut size={16} /> Cerrar Sesión
+                    </button>
+                  </div>
+                </div>
               </div>
             </>
           )}
@@ -75,7 +95,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="sm-hidden border-top border-gray-200" style={{ backgroundColor: 'var(--surface-color)', padding: '1rem', borderTop: '1px solid var(--border-color)', boxShadow: 'var(--shadow-md)' }}>
+        <div className="sm-hidden nav-mobile-menu">
           <div className="flex flex-col gap-3">
             <Link to="/" className="btn btn-secondary flex items-center justify-center gap-2" onClick={closeMenu}>
               <Search size={18} />
@@ -89,7 +109,12 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                {user.role === 'host' ? (
+                {user.role === 'admin' ? (
+                  <Link to="/admin" className="btn btn-outline text-blue-600 border-blue-600 flex items-center justify-center gap-2" onClick={closeMenu}>
+                    <ShieldCheck size={18} />
+                    <span>Panel de Control</span>
+                  </Link>
+                ) : user.role === 'host' ? (
                   <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center justify-center gap-2" onClick={closeMenu}>
                     <UserCircle size={18} />
                     <span>Panel de Anfitrión</span>
@@ -101,15 +126,26 @@ export default function Navbar() {
                   </Link>
                 )}
                 
-                <div className="flex items-center justify-between border-t border-gray-200 pt-3 mt-1">
-                  <div>
-                    <div className="text-sm font-bold">{user.full_name}</div>
-                    <div className="text-xs text-secondary capitalize">{user.role}</div>
+                <div className="flex flex-col border-t border-gray-200 pt-3 mt-1 gap-3">
+                  <div className="flex items-center gap-3">
+                    {user.avatar_url ? (
+                      <img src={user.avatar_url} alt="Avatar" className="w-10 h-10 rounded-full object-cover border-2 border-primary" />
+                    ) : (
+                      <UserCircle size={36} className="text-gray-400" />
+                    )}
+                    <div>
+                      <div className="text-sm font-bold">{user.full_name}</div>
+                      <div className="text-xs text-secondary capitalize">{user.role}</div>
+                    </div>
                   </div>
-                  <button onClick={handleLogout} className="btn btn-secondary flex items-center gap-2 text-red-500 border-red-200">
-                    <LogOut size={18} />
-                    <span>Salir</span>
-                  </button>
+                  <div className="flex gap-2">
+                    <Link to="/profile" className="btn btn-outline flex-1 flex items-center justify-center gap-2" onClick={closeMenu}>
+                      <UserCircle size={18} /> Perfil
+                    </Link>
+                    <button onClick={handleLogout} className="btn btn-secondary flex-1 flex items-center justify-center gap-2 text-red-500 border-red-200">
+                      <LogOut size={18} /> Salir
+                    </button>
+                  </div>
                 </div>
               </>
             )}

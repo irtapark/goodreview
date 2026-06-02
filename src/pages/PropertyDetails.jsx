@@ -42,8 +42,8 @@ export default function PropertyDetails() {
           </div>
         </div>
 
-        <div style={{ height: 'clamp(240px, 40vh, 500px)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', marginBottom: '2rem' }}>
-          <img src={property.image} alt={property.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div className="property-image-container">
+          <img src={property.image} alt={property.title} className="property-image" />
         </div>
 
         <div className="grid grid-cols-1 md-grid-cols-3 gap-8 md:gap-12">
@@ -57,7 +57,7 @@ export default function PropertyDetails() {
               <span className="text-secondary">Identidad verificada en GoodReview</span>
             </div>
             
-            <hr className="mb-8" style={{ borderColor: 'var(--border-color)' }} />
+            <hr className="mb-8 cashback-hr" />
             
             <h3 className="text-xl font-bold mb-4">Servicios principales</h3>
             <ul className="grid grid-cols-1 sm-grid-cols-2 gap-3 sm:gap-4 text-secondary mb-8">
@@ -69,7 +69,7 @@ export default function PropertyDetails() {
           </div>
 
           <div>
-            <div className="card p-6" style={{ position: 'sticky', top: '100px', marginBottom: '2rem' }}>
+            <div className="card p-6 property-sidebar-card">
               <h3 className="text-xl font-bold mb-4">Reservar Propiedad</h3>
               
               <div className="flex items-center gap-2 mb-4">
@@ -77,7 +77,7 @@ export default function PropertyDetails() {
                 <span className="text-secondary">/ noche aprox.</span>
               </div>
               
-              <div className="mt-4 p-4 rounded-lg animate-pulse-glow" style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0' }}>
+              <div className="mt-4 p-4 rounded-lg animate-pulse-glow property-pulse-bg">
                 <div className="flex items-center gap-2 mb-2 text-green font-bold">
                   <ShieldCheck size={20} />
                   Cashback Escalonado
@@ -96,16 +96,16 @@ export default function PropertyDetails() {
               <div className="mt-6 flex flex-col gap-3">
                 <div className="text-sm font-bold text-secondary mb-1">1. Reservar en:</div>
                 {property.platforms && property.platforms.map((p, index) => (
-                  <a key={index} href={p.url} target="_blank" rel="noreferrer" className="btn btn-secondary flex items-center justify-between" style={{ padding: '0.75rem 1rem' }}>
+                  <a key={index} href={p.url} target="_blank" rel="noreferrer" className="btn btn-secondary flex items-center justify-between">
                     <span className="flex items-center gap-2">
                       <ExternalLink size={16} /> {p.name}
                     </span>
                   </a>
                 ))}
                 
-                <hr className="my-2" style={{ borderColor: 'var(--border-color)' }} />
+                <hr className="my-2 cashback-hr" />
                 
-                <Link to={`/claim/${id}`} className="btn btn-primary text-center" style={{ width: '100%', padding: '1rem' }}>
+                <Link to={`/claim/${id}`} className="btn btn-primary text-center btn-padding-full">
                   2. Registrar Reserva (Cashback)
                 </Link>
               </div>

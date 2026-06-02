@@ -61,7 +61,7 @@ export default function Auth() {
         </div>
 
         {error && (
-          <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-medium" style={{ backgroundColor: '#fee2e2', color: '#b91c1c' }}>
+          <div className="bg-red-100 text-red-700 p-3 rounded mb-4 text-sm font-medium error-banner-red">
             {error}
           </div>
         )}

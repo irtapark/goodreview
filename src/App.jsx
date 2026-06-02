@@ -8,6 +8,8 @@ import ClaimCashback from './pages/ClaimCashback';
 import HostDashboard from './pages/HostDashboard';
 import GuestDashboard from './pages/GuestDashboard';
 import Auth from './pages/Auth';
+import Profile from './pages/Profile';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
               <Route path="/host" element={<HostDashboard />} />
               <Route path="/guest" element={<GuestDashboard />} />
               <Route path="/login" element={<Auth />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </main>
         </div>

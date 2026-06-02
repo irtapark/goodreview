@@ -70,14 +70,14 @@ export default function ClaimCashback() {
   if (success) {
     return (
       <div className="container py-20 text-center max-w-2xl">
-        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-green-100 mb-8" style={{ backgroundColor: '#d1fae5' }}>
+        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full mb-8 cashback-icon-bg">
           <CheckCircle size={48} color="var(--secondary-dark)" />
         </div>
         <h1 className="text-4xl font-bold mb-4">¡Registro Exitoso!</h1>
         <p className="text-xl text-secondary mb-8">
           Hemos enlazado tu reserva de {selectedPlatform} ({bookingId}) con éxito.
         </p>
-        <div className="p-6 rounded-lg mb-8 text-left" style={{ backgroundColor: '#f8fafc', border: '1px solid var(--border-color)' }}>
+        <div className="p-6 rounded-lg mb-8 text-left cashback-panel">
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2"><Banknote color="var(--secondary-color)"/> Instrucciones para tu Reembolso</h3>
           <ul className="space-y-3 text-secondary">
             <li>1. Disfruta tu estancia en <strong>{property.title}</strong>.</li>
@@ -109,8 +109,7 @@ export default function ClaimCashback() {
               <div className="mb-4">
                 <label className="block text-sm font-medium mb-1">Plataforma donde reservaste</label>
                 <select 
-                  className="w-full p-3 rounded border bg-white focus:outline-none focus:border-brand" 
-                  style={{ borderColor: 'var(--border-color)' }}
+                  className="w-full p-3 rounded border bg-white focus:outline-none focus:border-brand cashback-hr" 
                   value={selectedPlatform}
                   onChange={(e) => setSelectedPlatform(e.target.value)}
                 >
@@ -126,8 +125,7 @@ export default function ClaimCashback() {
                   type="text" 
                   required
                   placeholder={`Tu ID de reserva en ${selectedPlatform}`}
-                  className="w-full p-3 rounded border focus:outline-none focus:border-brand" 
-                  style={{ borderColor: 'var(--border-color)' }}
+                  className="w-full p-3 rounded border focus:outline-none focus:border-brand cashback-hr" 
                   value={bookingId}
                   onChange={(e) => setBookingId(e.target.value)}
                 />
@@ -140,14 +138,13 @@ export default function ClaimCashback() {
                   type="number" 
                   min="1"
                   required
-                  className="w-full p-3 rounded border" 
-                  style={{ borderColor: 'var(--border-color)' }}
+                  className="w-full p-3 rounded border cashback-hr" 
                   value={nights}
                   onChange={(e) => setNights(parseInt(e.target.value) || 1)}
                 />
               </div>
 
-              <div className="p-4 rounded-xl border-2 mb-6" style={{ borderColor: agreed ? 'var(--secondary-color)' : 'var(--border-color)', backgroundColor: agreed ? '#f0fdf4' : 'white', transition: 'all 0.3s' }}>
+              <div className={`p-4 rounded-xl border-2 mb-6 cashback-terms-box ${agreed ? 'accepted' : 'pending'}`}>
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input 
                     type="checkbox" 
@@ -183,7 +180,7 @@ export default function ClaimCashback() {
                 </div>
               </div>
 
-              <hr className="my-6" style={{ borderColor: 'var(--border-color)' }} />
+              <hr className="my-6 cashback-hr" />
 
               <h3 className="font-bold mb-4 flex items-center gap-2"><ShieldCheck color="var(--secondary-color)"/> Resumen de Cashback</h3>
               

@@ -477,3 +477,141 @@ input:focus-visible {
     /* TODO: Implementar inversión de colores aquí cuando se habilite el Dark Mode */
   }
 }
+
+/* --- Semantic Refactor --- */
+
+/* Navbar */
+.nav-bar-sticky {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-mobile-menu {
+  background-color: var(--surface-color);
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+/* Auth */
+.error-banner-red {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Cashback & Dashboard */
+.cashback-icon-bg {
+  background-color: #d1fae5;
+}
+
+.cashback-panel {
+  background-color: #f8fafc;
+  border: 1px solid var(--border-color);
+}
+
+.cashback-hr {
+  border-color: var(--border-color);
+}
+
+.cashback-terms-box {
+  transition: all 0.3s;
+}
+.cashback-terms-box.accepted {
+  border-color: var(--secondary-color);
+  background-color: #f0fdf4;
+}
+.cashback-terms-box.pending {
+  border-color: var(--border-color);
+  background-color: white;
+}
+
+.dashboard-pending-amount {
+  color: #d97706;
+}
+
+.dashboard-badge-sm {
+  font-size: 0.75rem;
+}
+
+.dashboard-badge-yellow {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.btn-padding-lg {
+  padding: 0.625rem 1.25rem;
+}
+
+/* Host Dashboard */
+.host-tabs-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.host-tabs-container::-webkit-scrollbar {
+  display: none;
+}
+
+.host-tab-item {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.host-property-card {
+  border-color: var(--border-color);
+}
+
+.host-badge-green {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.host-badge-blue {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.host-badge-yellow {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.host-table {
+  min-width: 640px;
+}
+
+.btn-padding-sm {
+  padding: 0.5rem 0.75rem;
+}
+
+/* Property Details */
+.property-image-container {
+  height: clamp(240px, 40vh, 500px);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.property-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.property-sidebar-card {
+  position: sticky;
+  top: 100px;
+  margin-bottom: 2rem;
+}
+
+.property-pulse-bg {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.btn-padding-full {
+  padding: 1rem;
+  width: 100%;
+}
