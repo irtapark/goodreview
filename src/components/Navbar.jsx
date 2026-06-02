@@ -22,28 +22,28 @@ export default function Navbar() {
           <span className="text-xl md:text-2xl font-bold text-brand">GoodReview</span>
         </Link>
         
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <Link to="/" className="btn btn-secondary flex items-center gap-2">
             <Search size={18} />
-            <span>Explorar Destinos</span>
+            <span className="hidden sm-inline">Explorar Destinos</span>
           </Link>
           
           {!user ? (
             <Link to="/login" className="btn btn-outline flex items-center gap-2">
               <UserCircle size={18} />
-              <span>Iniciar Sesión</span>
+              <span className="hidden sm-inline">Iniciar Sesión</span>
             </Link>
           ) : (
             <>
               {user.role === 'host' ? (
                 <Link to="/host" className="btn btn-outline text-brand border-brand flex items-center gap-2">
                   <UserCircle size={18} />
-                  <span>Panel de Anfitrión</span>
+                  <span className="hidden sm-inline">Panel de Anfitrión</span>
                 </Link>
               ) : (
                 <Link to="/guest" className="btn btn-outline flex items-center gap-2">
                   <UserCircle size={18} />
-                  <span>Mis Reclamos</span>
+                  <span className="hidden sm-inline">Mis Reclamos</span>
                 </Link>
               )}
               
