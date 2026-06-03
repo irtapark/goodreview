@@ -223,7 +223,7 @@ export default function HostDashboard() {
                   <div className="p-8 text-center text-secondary bg-white rounded-xl border border-gray-200">No hay reclamos registrados.</div>
                 ) : (
                   <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white w-full">
-                    <table className="w-full text-left host-table">
+                    <table className="w-full text-left host-table responsive-table">
                       <thead className="bg-gray-50 border-b border-gray-200">
                         <tr>
                           <th className="p-4 text-xs font-bold text-secondary uppercase">ID Reserva</th>
@@ -236,10 +236,10 @@ export default function HostDashboard() {
                       <tbody className="divide-y divide-gray-200">
                         {claims.map(claim => (
                           <tr key={claim.id}>
-                            <td className="p-4 font-mono text-sm">{claim.external_booking_id}</td>
-                            <td className="p-4 text-sm">{claim.platform}</td>
-                            <td className="p-4 font-bold text-green">€{claim.cashback_amount} <span className="text-xs text-secondary font-normal">(Fijo)</span></td>
-                            <td className="p-4">
+                            <td className="p-4 font-mono text-sm" data-label="ID Reserva">{claim.external_booking_id}</td>
+                            <td className="p-4 text-sm" data-label="Plataforma">{claim.platform}</td>
+                            <td className="p-4 font-bold text-green" data-label="Reembolso">€{claim.cashback_amount} <span className="text-xs text-secondary font-normal">(Fijo)</span></td>
+                            <td className="p-4" data-label="Estado">
                               {claim.status === 'paid' && (
                                 <span className="inline-flex items-center gap-1 text-xs font-bold text-green-700 bg-green-100 px-2 py-1.5 rounded host-badge-green">
                                   <ShieldCheck size={14} /> Pagado
@@ -256,7 +256,7 @@ export default function HostDashboard() {
                                 </span>
                               )}
                             </td>
-                            <td className="p-4">
+                            <td className="p-4" data-label="Acción">
                               {claim.status === 'paid' && (
                                 <span className="text-xs text-secondary font-semibold">Completado</span>
                               )}
@@ -296,7 +296,7 @@ export default function HostDashboard() {
               </button>
             </div>
             <form onSubmit={handleCreateProperty} className="p-6">
-              <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <div className="form-group col-span-2">
                   <label className="form-label">Título del Anuncio</label>
                   <input required className="form-input" value={newProp.title} onChange={e => setNewProp({...newProp, title: e.target.value})} placeholder="Ej. Villa Frente al Mar" />
@@ -317,7 +317,7 @@ export default function HostDashboard() {
               </div>
 
               <h3 className="font-bold mt-6 mb-4 flex items-center gap-2"><Wallet size={18}/> Estrategia de Cashback</h3>
-              <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
                 <div className="form-group mb-0">
                   <label className="form-label">Precio Regular (€)</label>
                   <input required type="number" className="form-input" value={newProp.regularPrice} onChange={e => setNewProp({...newProp, regularPrice: e.target.value})} placeholder="100" />
@@ -333,7 +333,7 @@ export default function HostDashboard() {
               </div>
 
               <h3 className="font-bold mt-6 mb-4 flex items-center gap-2"><ExternalLink size={18}/> Enlaces (Pega la URL de tu anuncio)</h3>
-              <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 <div className="form-group mb-0">
                   <label className="form-label">Airbnb Link</label>
                   <input className="form-input" value={newProp.airbnbUrl} onChange={e => setNewProp({...newProp, airbnbUrl: e.target.value})} placeholder="https://airbnb.com/..." />

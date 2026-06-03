@@ -40,9 +40,9 @@ export default function Home() {
       </section>
 
       {/* How it Works Section */}
-      <section id="como-funciona" className="py-16 md:py-20 section-bg-light">
+      <section id="como-funciona" className="py-24 md:py-32 section-bg-light">
         <div className="container">
-          <h2 className="font-bold text-center text-3xl md:text-4xl section-title mb-12">
+          <h2 className="font-bold text-center text-3xl md:text-4xl section-title mb-16 md:mb-20">
             La Garantía GoodReview
           </h2>
           <div className="grid grid-cols-1 md-grid-cols-3 gap-8 text-center">
@@ -72,7 +72,7 @@ export default function Home() {
       </section>
 
       {/* Featured Properties */}
-      <section id="destinos" className="py-16 md:py-20 bg-color-surface">
+      <section id="destinos" className="py-20 md:py-28 bg-color-surface">
         <div className="container">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Propiedades Destacadas</h2>

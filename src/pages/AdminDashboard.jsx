@@ -147,7 +147,7 @@ export default function AdminDashboard() {
                   <h2 className="text-xl font-bold">Gestión de Anfitriones</h2>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
+                  <table className="w-full text-left text-sm responsive-table">
                     <thead className="bg-gray-50 border-b border-gray-200 text-secondary uppercase text-xs">
                       <tr>
                         <th className="p-4 font-bold">ID</th>
@@ -159,13 +159,13 @@ export default function AdminDashboard() {
                     <tbody className="divide-y divide-gray-100">
                       {hosts.map(host => (
                         <tr key={host.id} className="hover:bg-gray-50">
-                          <td className="p-4 font-mono text-gray-500">{host.id}</td>
-                          <td className="p-4">
+                          <td className="p-4 font-mono text-gray-500" data-label="ID">{host.id}</td>
+                          <td className="p-4" data-label="Nombre / Correo">
                             <div className="font-bold">{host.full_name}</div>
                             <div className="text-xs text-gray-500">{host.email}</div>
                           </td>
-                          <td className="p-4 font-mono text-xs">{host.iban || <span className="text-gray-400 italic">No configurado</span>}</td>
-                          <td className="p-4 text-right font-bold text-emerald-600">€{(host.wallet_balance || 0).toFixed(2)}</td>
+                          <td className="p-4 font-mono text-xs" data-label="IBAN">{host.iban || <span className="text-gray-400 italic">No configurado</span>}</td>
+                          <td className="p-4 text-right font-bold text-emerald-600" data-label="Saldo Wallet">€{(host.wallet_balance || 0).toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -181,7 +181,7 @@ export default function AdminDashboard() {
                   <h2 className="text-xl font-bold">Propiedades Globales</h2>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
+                  <table className="w-full text-left text-sm responsive-table">
                     <thead className="bg-gray-50 border-b border-gray-200 text-secondary uppercase text-xs">
                       <tr>
                         <th className="p-4 font-bold">Propiedad</th>
@@ -192,12 +192,12 @@ export default function AdminDashboard() {
                     <tbody className="divide-y divide-gray-100">
                       {properties.map(prop => (
                         <tr key={prop.id} className="hover:bg-gray-50">
-                          <td className="p-4">
+                          <td className="p-4" data-label="Propiedad">
                             <div className="font-bold">{prop.title}</div>
                             <div className="text-xs text-gray-500">{prop.location}</div>
                           </td>
-                          <td className="p-4 font-mono text-gray-500">{prop.host_id}</td>
-                          <td className="p-4">
+                          <td className="p-4 font-mono text-gray-500" data-label="Anfitrión ID">{prop.host_id}</td>
+                          <td className="p-4" data-label="Cashback Est.">
                             <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded font-bold">
                               {prop.basePercent}% + {prop.extraPercent}%
                             </span>
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
                   <h2 className="text-xl font-bold">Auditoría de Reservas / Reclamos</h2>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left text-sm">
+                  <table className="w-full text-left text-sm responsive-table">
                     <thead className="bg-gray-50 border-b border-gray-200 text-secondary uppercase text-xs">
                       <tr>
                         <th className="p-4 font-bold">ID Ext.</th>
@@ -229,12 +229,12 @@ export default function AdminDashboard() {
                     <tbody className="divide-y divide-gray-100">
                       {claims.map(claim => (
                         <tr key={claim.id} className="hover:bg-gray-50">
-                          <td className="p-4 font-mono text-xs">{claim.external_booking_id}</td>
-                          <td className="p-4 text-xs text-gray-500">
+                          <td className="p-4 font-mono text-xs" data-label="ID Ext.">{claim.external_booking_id}</td>
+                          <td className="p-4 text-xs text-gray-500" data-label="IDs (Huésped / Anfitrión)">
                             G: {claim.guest_id} <br/> H: {claim.host_id}
                           </td>
-                          <td className="p-4 font-bold">€{claim.cashback_amount}</td>
-                          <td className="p-4">
+                          <td className="p-4 font-bold" data-label="Monto">€{claim.cashback_amount}</td>
+                          <td className="p-4" data-label="Estado">
                             <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-full ${
                               claim.status === 'paid' ? 'bg-emerald-100 text-emerald-800' :
                               claim.status === 'pending_review' ? 'bg-blue-100 text-blue-800' :

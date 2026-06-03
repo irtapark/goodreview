@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className="nav-bar-sticky">
-      <div className="container flex items-center justify-between py-3 md:py-4">
+      <div className="container flex items-center justify-between py-4 md:py-6">
         <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
           <ShieldCheck size={26} color="var(--secondary-color)" />
           <span className="text-xl md:text-2xl font-bold text-brand">GoodReview</span>
